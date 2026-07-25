@@ -1,0 +1,77 @@
+
+// Gramática Lark para el DSL de Generador de Interfaces (HTML/CSS)
+// HU-01: Palabras clave y símbolos
+// HU-02: Tipos de datos dinámicos (regex)
+
+// ---------- Reglas de producción (sintaxis) ----------
+
+programa: bloque_ventanas
+
+bloque_ventanas: ventana+
+
+ventana: VENTANA CADENA opcional_propiedades LKEY lista_elementos RKEY
+
+lista_elementos: elemento+
+
+elemento: componente_simple
+        | ventana
+
+componente_simple: tipo_elemento CADENA opcional_propiedades
+
+tipo_elemento: TEXTO
+             | INPUT
+             | BOTON
+             | IMAGEN
+
+opcional_propiedades: LBRACKET lista_propiedades RBRACKET
+                     |
+
+lista_propiedades: propiedad (COMA propiedad)*
+
+propiedad: IDENTIFICADOR IGUAL valor
+
+valor: CADENA
+     | IDENTIFICADOR
+     | NUMERO_CON_UNIDAD
+     | COLOR_HEX
+     | COLOR_RGB
+
+
+// ---------- HU-01: Palabras clave (terminales de cadena literal) ----------
+// Lark le da automáticamente mayor prioridad a los terminales definidos
+
+VENTANA: "Ventana"
+TEXTO:   "Texto"
+INPUT:   "Input"
+BOTON:   "Boton"
+IMAGEN:  "Imagen"
+
+
+// HU-01: Símbolos y delimitadores
+
+LKEY:     "{"
+RKEY:     "}"
+LBRACKET: "["
+RBRACKET: "]"
+IGUAL:    "="
+COMA:     ","
+
+
+// HU-02: Tipos de datos dinámicos (regex)
+// CADENA usa comillas dobles normales, ej: "Mi App", "Guardar"
+
+CADENA: /"[^"]*"/
+
+COLOR_HEX: /#[0-9a-fA-F]{3,6}/
+
+COLOR_RGB: /rgb\s*\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)/
+
+NUMERO_CON_UNIDAD: /\d+(px|%)/
+
+IDENTIFICADOR: /[a-zA-Z_][a-zA-Z0-9_]*/
+
+
+// ---------- Manejo de espacios en blanco ----------
+
+%import common.WS
+%ignore WS
