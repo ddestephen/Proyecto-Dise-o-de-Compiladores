@@ -1,106 +1,191 @@
-# Definicion inicial de tokens
+# Definición de Tokens
 
-A continuacion se definen los tokens que podran ser identificados por el lexer para un compilador de HTML/CSS.
+A continuación se describen los tokens reconocidos por el analizador léxico del DSL para la generación de interfaces HTML/CSS.
 
-## Palabras clave
+---
 
-#### VENTANA
+# Palabras clave
 
-**Patrón:** Ventana
+Las palabras clave representan los componentes principales del lenguaje y poseen un significado reservado.
 
-**Lexema:** Ventana
+## VENTANA
 
-#### TEXTO
+**Descripción:** Define una ventana o contenedor principal.
 
-+ **Patrón:** Texto
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `Ventana` |
+| **Lexema** | `Ventana` |
 
-+ **Lexema:** Texto
+---
 
-#### INPUT
+## TEXTO
 
-+ **Patrón:** Input
+**Descripción:** Define un componente de texto.
 
-+ **Lexema:** Input
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `Texto` |
+| **Lexema** | `Texto` |
 
-#### BOTON
+---
 
-+ **Patrón:** Boton
+## INPUT
 
-+ **Lexema:** Boton
+**Descripción:** Define un campo de entrada de datos.
 
-#### IMAGEN
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `Input` |
+| **Lexema** | `Input` |
 
-+ **Patrón:** Imagen
+---
 
-+ **Lexema:** Imagen
+## BOTON
 
-## Símbolos y delimitadores
+**Descripción:** Define un botón.
 
-#### LKEY
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `Boton` |
+| **Lexema** | `Boton` |
 
-+ **Patrón:** \\{
+---
 
-+ **Lexema:** \{
+## IMAGEN
 
-#### RKEY
+**Descripción:** Define un componente de imagen.
 
-+ **Patrón:** \\}
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `Imagen` |
+| **Lexema** | `Imagen` |
 
-+ **Lexema:** \}
+---
 
-#### LBRACKET
+# Símbolos y delimitadores
 
-+ **Patrón:** \\[
+Estos tokens permiten delimitar bloques y listas de propiedades.
 
-+ **Lexema:** \[
+## LKEY
 
-#### RBRACKET
+**Descripción:** Inicio de un bloque.
 
-+ **Patrón:** \\]
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `\{` |
+| **Lexema** | `{` |
 
-+ **Lexema:** \]
+---
 
-#### IGUAL
+## RKEY
 
-+ **Patrón:** \=
+**Descripción:** Fin de un bloque.
 
-+ **Lexema:** \=
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `\}` |
+| **Lexema** | `}` |
 
-#### COMA
+---
 
-+ **Patrón:** \,
+## LBRACKET
 
-+ **Lexema:** \,
+**Descripción:** Inicio de una lista de propiedades.
 
-## Literales
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `\[` |
+| **Lexema** | `[` |
 
-#### CADENA
+---
 
-+ **Patrón:** ¨[^¨]*¨
+## RBRACKET
 
-+ **Lexema:** Ejemplos: ¨hola¨, ¨Mi app¨
+**Descripción:** Fin de una lista de propiedades.
 
-#### COLOR_HEX
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `\]` |
+| **Lexema** | `]` |
 
-+ **Patrón:** #[0-9a-fA-F]{3,6}
+---
 
-+ **Lexema:** Ejemplos: #000000, #1a84b5, #c9a226
+## IGUAL
 
-#### COLOR_RGB
+**Descripción:** Operador de asignación.
 
-+ **Patrón:** rgb\s*\\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `=` |
+| **Lexema** | `=` |
 
-+ **Lexema:** Ejemplos: rgb(0,0,0), rgb(2,1,3)
+---
 
-#### NUMERO_CON_UNIDAD
+## COMA
 
-+ **Patrón:** \d+(px|%)
+**Descripción:** Separador de propiedades.
 
-+ **Lexema:** Ejemplos: 890px, 18%
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `,` |
+| **Lexema** | `,` |
 
+---
 
-#### IDENTIFICADOR
+# Literales
 
-+ **Patrón:** [a-zA-Z_][a-zA-Z0-9_]*
+Los literales representan valores constantes utilizados dentro del lenguaje.
 
-+ **Lexema:**
+## CADENA
+
+**Descripción:** Secuencia de caracteres delimitada por comillas dobles.
+
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `"[^"]*"` |
+| **Ejemplos** | `"Hola"`, `"Mi aplicación"` |
+
+---
+
+## COLOR_HEX
+
+**Descripción:** Color expresado en notación hexadecimal.
+
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `#[0-9a-fA-F]{3,6}` |
+| **Ejemplos** | `#000000`, `#FFFFFF`, `#1A84B5` |
+
+---
+
+## COLOR_RGB
+
+**Descripción:** Color expresado mediante el modelo RGB.
+
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `rgb\s*\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)` |
+| **Ejemplos** | `rgb(0,0,0)`, `rgb(255,255,255)` |
+
+---
+
+## NUMERO_CON_UNIDAD
+
+**Descripción:** Número entero acompañado de una unidad de medida.
+
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `\d+(px|%)` |
+| **Ejemplos** | `250px`, `80%` |
+
+---
+
+## IDENTIFICADOR
+
+**Descripción:** Nombre utilizado para representar propiedades o referencias.
+
+| Atributo | Valor |
+|----------|-------|
+| **Patrón** | `[a-zA-Z_][a-zA-Z0-9_]*` |
+| **Ejemplos** | `ancho`, `color`, `guardarDatos`, `tituloPrincipal` |

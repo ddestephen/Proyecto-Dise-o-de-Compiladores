@@ -1,0 +1,41 @@
+Ventana "FinanzApp" [fondo=#f4f5f7, padding=0, display=flex, direccion=column] {
+
+    Header [fondo=#111827, padding="18px 30px", display=flex, justificar=space-between, alinear=center] {
+        Titulo "FinanzApp" [nivel=2, color=#ffffff]
+        Enlace "Cerrar sesión" [href="#", color=#9ca3af]
+    }
+
+    Contenedor [display=flex, direccion=row, espacio=0, flex=1] {
+
+        Aside [fondo=#ffffff, ancho=220px, padding=20px, borde="1px solid #e5e7eb"] {
+            Titulo "Menú" [nivel=3, color=#111827]
+            Parrafo "Resumen" [color=#374151]
+            Parrafo "Transacciones" [color=#374151]
+            Parrafo "Configuración" [color=#374151]
+        }
+
+        Main [flex=1, padding=30px] {
+            Titulo "Resumen Financiero" [nivel=1, color=#111827]
+            Parrafo "Tu panorama financiero de este mes." [color=#6b7280]
+
+            Contenedor [display=flex, direccion=row, espacio="15px"] {
+                Ventana "Balance" [fondo=#ffffff, padding=20px] {
+                    Parrafo "BALANCE" [color=#9ca3af, tamano=12px]
+                    Titulo "L. 24,850.00" [nivel=2, color=#111827]
+                }
+                Ventana "Ingresos" [fondo=#ffffff, padding=20px] {
+                    Parrafo "INGRESOS" [color=#9ca3af, tamano=12px]
+                    Titulo "L. 32,000.00" [nivel=2, color=#16a34a]
+                }
+                Ventana "Gastos" [fondo=#ffffff, padding=20px] {
+                    Parrafo "GASTOS" [color=#9ca3af, tamano=12px]
+                    Titulo "L. 7,150.00" [nivel=2, color=#dc2626]
+                }
+            }
+        }
+    }
+
+    Footer [fondo=#111827, padding="15px 30px", alineacion=center] {
+        Parrafo "© 2026 FinanzApp — Todos los derechos reservados" [color=#9ca3af, tamano=12px]
+    }
+}

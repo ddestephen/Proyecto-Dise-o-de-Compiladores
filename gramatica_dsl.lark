@@ -1,0 +1,96 @@
+// Gramática Lark para el DSL de Generador de Interfaces (HTML/CSS)
+
+// ---------- Reglas de producción (sintaxis) ----------
+programa: bloque_ventanas
+bloque_ventanas: ventana_raiz+
+
+ventana_raiz: VENTANA CADENA opcional_propiedades LKEY lista_elementos RKEY
+ventana: VENTANA CADENA opcional_propiedades LKEY lista_elementos RKEY
+
+lista_elementos: elemento+
+elemento: componente_simple
+        | ventana
+        | contenedor
+
+// Contenedores semánticos de layout: no llevan título con comillas,
+// solo propiedades (para flex/grid) y un bloque de elementos internos.
+contenedor: tipo_contenedor opcional_propiedades LKEY lista_elementos RKEY
+
+tipo_contenedor: HEADER
+                | FOOTER
+                | ASIDE
+                | MAIN
+                | DIV
+
+componente_simple: tipo_elemento contenido_opcional opcional_propiedades
+
+contenido_opcional: CADENA
+                   |
+
+tipo_elemento: TEXTO
+             | INPUT
+             | BOTON
+             | IMAGEN
+             | PARRAFO
+             | ENLACE
+             | TITULO
+             | SEPARADOR
+             | CHECKBOX
+             | RADIO
+             | TEXTAREA
+             | SELECT
+             | ETIQUETA
+
+opcional_propiedades: LBRACKET lista_propiedades RBRACKET
+                     |
+lista_propiedades: propiedad (COMA propiedad)*
+propiedad: IDENTIFICADOR IGUAL valor
+valor: CADENA
+     | IDENTIFICADOR
+     | NUMERO_CON_UNIDAD
+     | NUMERO
+     | COLOR_HEX
+     | COLOR_RGB
+
+// ---------- HU-01: Palabras clave (terminales de cadena literal) ----------
+VENTANA:   "Ventana"
+TEXTO:     "Texto"
+INPUT:     "Input"
+BOTON:     "Boton"
+IMAGEN:    "Imagen"
+PARRAFO:   "Parrafo"
+ENLACE:    "Enlace"
+TITULO:    "Titulo"
+SEPARADOR: "Separador"
+CHECKBOX:  "CheckBox"
+RADIO:     "Radio"
+TEXTAREA:  "TextArea"
+SELECT:    "Select"
+ETIQUETA:  "Etiqueta"
+
+// Contenedores de layout
+HEADER: "Header"
+FOOTER: "Footer"
+ASIDE:  "Aside"
+MAIN:   "Main"
+DIV:    "Contenedor"
+
+// HU-01: Símbolos y delimitadores
+LKEY:     "{"
+RKEY:     "}"
+LBRACKET: "["
+RBRACKET: "]"
+IGUAL:    "="
+COMA:     ","
+
+// HU-02: Tipos de datos dinámicos (regex)
+CADENA: /"[^"]*"/
+COLOR_HEX: /#[0-9a-fA-F]{3,6}/
+COLOR_RGB: /rgb\s*\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)/
+NUMERO_CON_UNIDAD: /\d+(px|%)/
+NUMERO: /\d+/
+IDENTIFICADOR: /[a-zA-Z_][a-zA-Z0-9_-]*/
+
+// ---------- Manejo de espacios en blanco ----------
+%import common.WS
+%ignore WS
