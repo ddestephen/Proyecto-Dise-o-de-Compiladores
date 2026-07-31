@@ -1,0 +1,9 @@
+Ventana "Mi Aplicación Principal" [fondo=#e0e0e0] {
+    Texto "Bienvenido al sistema" [color=#333333]
+    Input "Ingrese su usuario"
+    Boton "Iniciar Sesión" [fondo=#28a745, color=#ffffff]
+    
+    Ventana "Sección de Contacto" [fondo=#ffffff] {
+        Texto "Escríbenos a soporte@ejemplo.com" [color=rgb(100, 100, 100)]
+    }
+}
